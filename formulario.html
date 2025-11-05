@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simples</title>
+</head>
+<body>
+    <h1> Calculadora Simples</h1>
+   <form action="processar.php" method="post">
+        <label for="n1">
+            Número 1:
+            <input type="number" name="n1">
+        </label>
+        <br><br>
+        <label for="n2">
+            Número 2:
+            <input type="number" name="n2">
+        </label>
+        <br><br>
+        <label for="nome">Digite a Operação (+ - * /):</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite a operação matemática" required><br><br>
+        <input type="submit" value="Calcular">
+    </form>
+</body>
+</html>

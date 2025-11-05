@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💖 YOU! 💖</title>
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #ffb6c1, #b19cd9, #7fffd4);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 4em;
+      text-shadow: 0 0 20px #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    h1:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 40px #ff69b4;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin-top: 15px;
+      opacity: 0.9;
+    }
+
+    .glitter {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, #fff, transparent);
+      border-radius: 50%;
+      animation: sparkle 1.5s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(100px) scale(0.5); }
+    }
+
+    .hearts {
+      position: absolute;
+      font-size: 1.5em;
+      animation: floatUp 3s ease-out infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">&lt;head&gt; YOU! &lt;/head&gt;</h1>
+  <p id="message">Porque meu coração renderiza melhor quando você tá no &lt;body&gt; 💻💞</p>
+
+  <script>
+    const cantadas = [
+      "Você é o CSS que dá estilo à minha vida 🌈",
+      "Se você fosse um código, eu te executaria em loop infinito 💘",
+      "Nosso amor não tem bug, só sintaxe perfeita 💻💕",
+      "Entre 0 e 1, você é meu valor verdadeiro 🔥",
+      "Se amar fosse um framework, o seu seria o React-ion 💅",
+      "Me chama de variável e me dá um valor 🌸",
+      "Prometo nunca dar alt+f4 em você 💋",
+      "Você e eu: HTML e body, juntos até o fechamento da tag 💞"
+    ];
+
+    const title = document.getElementById("title");
+    const message = document.getElementById("message");
+
+    title.addEventListener("click", () => {
+      const rand = Math.floor(Math.random() * cantadas.length);
+      message.innerHTML = cantadas[rand];
+
+      // Criar glitter
+      for (let i = 0; i < 15; i++) {
+        const glitter = document.createElement("div");
+        glitter.classList.add("glitter");
+        glitter.style.left = Math.random() * window.innerWidth + "px";
+        glitter.style.top = Math.random() * window.innerHeight + "px";
+        glitter.style.animationDuration = 1 + Math.random() * 2 + "s";
+        document.body.appendChild(glitter);
+        setTimeout(() => glitter.remove(), 2000);
+      }
+
+      // Criar corações
+      for (let i = 0; i < 6; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("hearts");
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = (window.innerHeight - 50) + "px";
+        heart.textContent = "💖";
+        heart.style.animationDuration = 2 + Math.random() * 2 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    });
+  </script>
+</body>
+</html>
