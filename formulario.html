@@ -18,8 +18,9 @@
             <input type="number" name="n2">
         </label>
         <br><br>
-        <label for="nome">Digite a Operação (+ - * /):</label>
-        <input type="text" id="nome" name="nome" placeholder="Digite a operação matemática" required><br><br>
+        <label for="operacao">Digite a operação (+ - * /):</label>
+        <input type="text" id="operacao" name="operacao" placeholder="Digite + - * /" required pattern="[+\-*/]" maxlength="1" title="Digite um dos símbolos: + - * /">
+        <br><br>
         <input type="submit" value="Calcular">
     </form>
 </body>

@@ -4,25 +4,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nota1 = isset($_POST['n1']) ? floatval(str_replace(',', '.', $_POST['n1'])) : 0.0;
     $nota2 = isset($_POST['n2']) ? floatval(str_replace(',', '.', $_POST['n2'])) : 0.0;
    
-    $operacao = isset($_POST['operacao']) ? $_POST['operacao'] : '';
+    // Ler e sanitizar operação: trim, pegar primeiro caractere (se o usuário digitar espaços ou texto)
+    $operacao = isset($_POST['operacao']) ? trim($_POST['operacao']) : '';
+    if ($operacao !== '') {
+        $operacao = substr($operacao, 0, 1);
+    }
     $resultado = 0;
-    
-    if ($operacao === '+') {
-        $resultado = $nota1 + $nota2;
-        $status = 'Resultado da Soma';
-    } elseif ($operacao  === '-') {
-        $resultado = $nota1 - $nota2;
-        $status = 'Resultado da Subtração';
-    } elseif ($operacao === '*') {
-        $resultado = $nota1 * $nota2;
-        $status = 'Resultado da Multiplicação';
-    } elseif ($operacao === '/') {
-        if ($nota2 != 0) {
-            $resultado = $nota1 / $nota2;
-            $status = 'Resultado da Divisão';
-        } else {
-            $resultado = 'Erro: Divisão por zero';
-            $status = 'Erro';
+
+    // Validação: operação deve ser uma das permitidas
+    $operacoes_permitidas = array('+', '-', '*', '/');
+    if (!in_array($operacao, $operacoes_permitidas, true)) {
+        $resultado = 'Erro: Operação inválida';
+        $status = 'Erro';
+    } else {
+        if ($operacao === '+') {
+            $resultado = $nota1 + $nota2;
+            $status = 'Resultado da Soma';
+        } elseif ($operacao === '-') {
+            $resultado = $nota1 - $nota2;
+            $status = 'Resultado da Subtração';
+        } elseif ($operacao === '*') {
+            $resultado = $nota1 * $nota2;
+            $status = 'Resultado da Multiplicação';
+        } elseif ($operacao === '/') {
+            if ($nota2 != 0) {
+                $resultado = $nota1 / $nota2;
+                $status = 'Resultado da Divisão';
+            } else {
+                $resultado = 'Erro: Divisão por zero';
+                $status = 'Erro';
+            }
         }
     }
 
@@ -46,7 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <p> Número 2: <?php echo $nota2; ?> </p>
 <h2>Resultado:</h2>
 <p>
-    <?php 
+    <strong><?php echo isset($status) ? $status : ''; ?></strong>
+</p>
+<p>
+    <?php
     if (is_numeric($resultado)) {
         echo number_format($resultado, 2, ',', '.');
     } else {
