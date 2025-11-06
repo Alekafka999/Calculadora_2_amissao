@@ -41,6 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: formulario.html');
     exit;
 }
+
+// Inclui o arquivo de conexão com o banco de dados
+include "conexao.php";
+
+$ql = "INSERT INTO tb_historico (nota1, nota2, operacao, resultado) VALUES ('$nota1', '$nota2', '$operacao', '$resultado')";
+$comando = $conexao->prepare($ql);
+$comando->execute();
+
+
 ?> 
 
 <!DOCTYPE html>
