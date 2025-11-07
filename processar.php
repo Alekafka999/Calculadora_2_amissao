@@ -45,8 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Inclui o arquivo de conexão com o banco de dados
 include "conexao.php";
 
-$ql = "INSERT INTO tb_historico (nota1, nota2, operacao, resultado) VALUES ('$nota1', '$nota2', '$operacao', '$resultado')";
-$comando = $conexao->prepare($ql);
+$sql = "INSERT INTO tb_historico (n1, n2, operador, resultado) VALUES ('$nota1', '$nota2', '$operacao', '$resultado')";
+$comando = $conexao->prepare($sql);
 $comando->execute();
 
 
